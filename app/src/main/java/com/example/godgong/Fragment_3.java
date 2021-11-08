@@ -30,7 +30,7 @@ public class Fragment_3 extends Fragment {
 
         mArrayList3 = new ArrayList<>();
 
-        mAdapter3 = new CustomAdapter(mArrayList3);
+        mAdapter3 = new CustomAdapter( mArrayList3);
         mRecyclerView.setAdapter(mAdapter3);
 
 
@@ -58,4 +58,5 @@ public class Fragment_3 extends Fragment {
     }
 
 }
+
 

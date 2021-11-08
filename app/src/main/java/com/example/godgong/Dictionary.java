@@ -1,5 +1,6 @@
 package com.example.godgong;
 
+
 public class Dictionary {
 
 

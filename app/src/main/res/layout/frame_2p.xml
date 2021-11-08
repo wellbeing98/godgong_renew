@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:scrollbarFadeDuration="0"
         android:scrollbarSize="5dp"
-        tools:context=".MainActivity">
+        tools:context=".ChooseRoom">
 
 
         <androidx.recyclerview.widget.RecyclerView

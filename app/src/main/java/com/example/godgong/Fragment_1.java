@@ -1,5 +1,6 @@
 package com.example.godgong;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +37,7 @@ public class Fragment_1 extends Fragment {
 
         mArrayList = new ArrayList<>();
 
-        mAdapter = new CustomAdapter( mArrayList);
+        mAdapter = new CustomAdapter(mArrayList);
         mRecyclerView.setAdapter(mAdapter);
 
 
@@ -58,7 +59,9 @@ public class Fragment_1 extends Fragment {
                 mArrayList.add(0, data); //RecyclerView의 첫 줄에 i삽입
 //                mArrayList.add(data); // RecyclerView의 마지막 줄에 삽입
 
-                mAdapter.notifyDataSetChanged();             }
+                mAdapter.notifyDataSetChanged();
+                Intent intent = new Intent( getActivity() , WritingActivity.class);
+                startActivity(intent);}
         });
 
         return rootView;
