@@ -1,6 +1,7 @@
 package com.example.godgong;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -83,7 +84,7 @@ public class WritingActivity extends AppCompatActivity {
             {
                 Toast.makeText(WritingActivity.this, result, Toast.LENGTH_SHORT).show();
             }
-
+            finish();
         }
 
 
