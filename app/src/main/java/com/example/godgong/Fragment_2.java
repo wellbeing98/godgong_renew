@@ -33,6 +33,16 @@ public class Fragment_2 extends Fragment {
         mArrayList2 = new ArrayList<>();
 
         mAdapter2 = new CustomAdapter( mArrayList2);
+        mAdapter2.setOnItemClickListener(
+                new CustomAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View v, int pos) {
+
+                        Intent intent = new Intent( getActivity() , DetailActivity.class);
+                        startActivity(intent);
+                    }
+                }
+        );
         mRecyclerView.setAdapter(mAdapter2);
 
 

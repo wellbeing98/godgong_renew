@@ -92,7 +92,7 @@
             android:textSize="17dp"
             android:minHeight="0dp"
             android:padding="3dp"
-            android:background="@drawable/round"/>
+           />
 
     </LinearLayout>
 

@@ -38,6 +38,16 @@ public class Fragment_1 extends Fragment {
         mArrayList = new ArrayList<>();
 
         mAdapter = new CustomAdapter(mArrayList);
+        mAdapter.setOnItemClickListener(
+                new CustomAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View v, int pos) {
+
+                        Intent intent = new Intent( getActivity() , DetailActivity.class);
+                        startActivity(intent);
+                    }
+                }
+        );
         mRecyclerView.setAdapter(mAdapter);
 
 
@@ -58,6 +68,8 @@ public class Fragment_1 extends Fragment {
 
                 mArrayList.add(0, data); //RecyclerView의 첫 줄에 i삽입
 //                mArrayList.add(data); // RecyclerView의 마지막 줄에 삽입
+
+
 
                 mAdapter.notifyDataSetChanged();
                 Intent intent = new Intent( getActivity() , WritingActivity.class);

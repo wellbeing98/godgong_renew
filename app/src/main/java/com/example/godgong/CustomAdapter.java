@@ -5,7 +5,9 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,8 +17,16 @@ import java.util.ArrayList;
 
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
-
+    public interface OnItemClickListener{
+        void onItemClick(View v, int pos);
+    }
     private ArrayList<Dictionary> mList;
+    private OnItemClickListener mItemClickListener = null;
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.mItemClickListener = listener;
+    }
+
+
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {
         protected TextView num;
@@ -29,7 +39,20 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             this.num = (TextView) view.findViewById(R.id.num_listitem);
             this.userId = (TextView) view.findViewById(R.id.userId_listitem);
             this.korean = (TextView) view.findViewById(R.id.korean_listitem);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int pos = getAdapterPosition();
+                    if(pos!= RecyclerView.NO_POSITION){
+                        if(mItemClickListener != null){
+                            mItemClickListener.onItemClick(view, pos);
+
+                        }
+                    }
+                }
+            });
         }
+
     }
 
 
@@ -48,6 +71,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         CustomViewHolder viewHolder = new CustomViewHolder(view);
 
         return viewHolder;
+
     }
 
 
@@ -70,6 +94,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         viewholder.userId.setText(mList.get(position).getUserId());
         viewholder.korean.setText(mList.get(position).getKorean());
     }
+
+
 
     @Override
     public int getItemCount() {
