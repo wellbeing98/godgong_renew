@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "975099685442",
+    "firebase_url": "https://godgong-72410-default-rtdb.firebaseio.com",
+    "project_id": "godgong-72410",
+    "storage_bucket": "godgong-72410.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:975099685442:android:45966bd9e17bbe0c5f9bdb",
+        "android_client_info": {
+          "package_name": "com.example.godgong"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "975099685442-sfh3cpi5lb25818smu6npdo6bd81kjva.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQbTCakbYkj7lqqOToUiF1-B52GpnM6ys"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "975099685442-sfh3cpi5lb25818smu6npdo6bd81kjva.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
