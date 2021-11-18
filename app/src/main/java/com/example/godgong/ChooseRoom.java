@@ -1,17 +1,15 @@
 package com.example.godgong;
 
 
-
+import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.os.Bundle;
-
 import me.relex.circleindicator.CircleIndicator3;
 
-    public class ChooseRoom extends AppCompatActivity {
+public class ChooseRoom extends AppCompatActivity {
 
         private ViewPager2 mPager;
         private FragmentStateAdapter pagerAdapter;

@@ -9,28 +9,28 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="350dp"
+        android:layout_width="352dp"
         android:layout_height="59dp"
         android:layout_gravity="center">
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
 
-
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="-1dp"
+            tools:srcCompat="@tools:sample/avatars" />
 
         <EditText
             android:id="@+id/title_et"
-            android:layout_marginLeft="60dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="60dp"
             android:background="#eeeeee"
             android:hint=" 제목을 입력하세요" />
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="59dp"
-            android:layout_height="54dp"
-            app:srcCompat="@drawable/write"
-            tools:layout_editor_absoluteX="1dp"
-            tools:layout_editor_absoluteY="4dp"
-            tools:ignore="MissingConstraints" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout

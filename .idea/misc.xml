@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/98tom/AndroidStudioProjects/godgong_renew/app/src/main/res/layout/activity_chat.xml" value="0.271875" />
+        <entry key="..\:/Users/98tom/AndroidStudioProjects/godgong_renew/app/src/main/res/layout/activity_detail.xml" value="0.2755208333333333" />
+        <entry key="..\:/Users/98tom/AndroidStudioProjects/godgong_renew/app/src/main/res/layout/activity_writing.xml" value="0.2755208333333333" />
         <entry key="..\:/Users/ChungTaeWon/AndroidStudioProjects/godgong/app/src/main/res/layout/activity_detail.xml" value="0.33125" />
         <entry key="..\:/Users/ChungTaeWon/AndroidStudioProjects/godgong/app/src/main/res/layout/activity_writing.xml" value="0.19895833333333332" />
         <entry key="..\:/Users/ChungTaeWon/AndroidStudioProjects/godgong/app/src/main/res/layout/chooseroom.xml" value="0.19895833333333332" />

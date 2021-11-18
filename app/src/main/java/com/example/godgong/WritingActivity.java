@@ -1,149 +1,112 @@
 package com.example.godgong;
-import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-import javax.net.ssl.HttpsURLConnection;
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class WritingActivity extends AppCompatActivity {
 
-
+    private FirebaseAuth mFirebaseAuth;       //파이어베이스 인증
+    private DatabaseReference mDatabaseRef;
+    private DatabaseReference mDatabase;
 
 
     // 사용할 컴포넌트 선언
     EditText title_et, content_et;
     Button reg_button;
-
+    ImageView mimage;
     // 유저아이디 변수
     String userid = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_writing);
+        setContentView(R.layout.activity_writing_post);
 
-// ListActivity 에서 넘긴 userid 를 변수로 받음
-        userid = getIntent().getStringExtra("userid");
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("GodGong");
+
+
+        FirebaseAuth mAuth;
+// ...
+// Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
 
 // 컴포넌트 초기화
+        mimage = findViewById(R.id.imageView2);
         title_et = findViewById(R.id.title_et);
         content_et = findViewById(R.id.content_et);
         reg_button = findViewById(R.id.reg_button);
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageReference = storage.getReference();
+        StorageReference pathReference = storageReference.child("images");
+        if(pathReference == null){
+            Toast.makeText(WritingActivity.this, "저장소에 사진이 없습니다.", Toast.LENGTH_SHORT).show();}
+        else{
+            Toast.makeText(WritingActivity.this, "저장소에 사진이 있습니다.", Toast.LENGTH_SHORT).show();
+            FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
-// 버튼 이벤트 추가
+            StorageReference submitProfile = storageReference.child("images/"+firebaseUser.getUid());
+
+
+            Glide.with(this /* context */)
+                    .load(submitProfile)
+                    .into(mimage);
+        }
+        mimage.setImageResource(R.drawable.ic_launcher_background);
+
         reg_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-// 게시물 등록 함수
-                RegBoard regBoard = new RegBoard();
-                regBoard.execute(userid, title_et.getText().toString(), content_et.getText().toString());
+
+                String strTitle = title_et.getText().toString();
+                String strContent = content_et.getText().toString();
+                FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+//               ImageView image = mimage.getDrawable(R.drawable.ic_launcher_background);
+
+                Post post = new Post();
+
+
+                post.setTitle_et(strTitle);
+                post.setContent_et(strContent);
+
+
+                //setValue : database에 insert (삽입) 행위
+                mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).child("post").push().setValue(post);
+                Toast.makeText(WritingActivity.this, "글이 등록되었습니다.", Toast.LENGTH_SHORT).show();
+                finish();
+                // Firebase Auth 진행
+
+
             }
         });
 
+
+
+
+
+
+
+
     }
 
-    class RegBoard extends AsyncTask<String, Void, String> {
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-
-        }
-
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-
-
-            if(result.equals("success")){
-// 결과값이 success 이면
-// 토스트 메시지를 뿌리고
-// 이전 액티비티(ListActivity)로 이동,
-// 이때 ListActivity 의 onResume() 함수 가 호출되며, 데이터를 새로 고침
-                Toast.makeText(WritingActivity.this, "등록되었습니다.", Toast.LENGTH_SHORT).show();
-                finish();
-            }else
-            {
-                Toast.makeText(WritingActivity.this, result, Toast.LENGTH_SHORT).show();
-            }
-            finish();
-        }
-
-
-
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            String userid = params[0];
-            String title = params[1];
-            String content = params[2];
-
-            String server_url = "http://15.164.252.136/reg_board.php";
-
-
-            URL url;
-            String response = "";
-            try {
-                url = new URL(server_url);
-
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setReadTimeout(15000);
-                conn.setConnectTimeout(15000);
-                conn.setRequestMethod("POST");
-                conn.setDoInput(true);
-                conn.setDoOutput(true);
-                Uri.Builder builder = new Uri.Builder()
-                        .appendQueryParameter("userid", userid)
-                        .appendQueryParameter("title", title)
-                        .appendQueryParameter("content", content);
-                String query = builder.build().getEncodedQuery();
-
-                OutputStream os = conn.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(
-                        new OutputStreamWriter(os, "UTF-8"));
-                writer.write(query);
-                writer.flush();
-                writer.close();
-                os.close();
-
-                conn.connect();
-                int responseCode=conn.getResponseCode();
-
-                if (responseCode == HttpsURLConnection.HTTP_OK) {
-                    String line;
-                    BufferedReader br=new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                    while ((line=br.readLine()) != null) {
-                        response+=line;
-                    }
-                }
-                else {
-                    response="";
-
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            return response;
-        }
-    }
 }
