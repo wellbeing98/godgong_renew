@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,7 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import com.google.firebase.database.DataSnapshot;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,8 +33,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Fragment_1 extends Fragment {
-
-    private ArrayList<Dictionary> mArrayList = new ArrayAdapter<Dictionary>();
+    String Title;
+    private ArrayList<Dictionary> mArrayList;
     private CustomAdapter mAdapter;
     private int count = -1;
     LinearLayoutManager mLinearLayoutManager;
@@ -53,40 +54,13 @@ public class Fragment_1 extends Fragment {
                 R.layout.frame_1p, container, false);
 
         RecyclerView mRecyclerView;
-        ;
-        List<Object> Array = new ArrayList<Object>();
-        RecyclerView listView =   (RecyclerView) rootView.findViewById(R.id.recyclerview_main_list);
+
+
+
 
         initDatabase();
         DatabaseReference mDatabaseRef;
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("GodGong");
-        mArrayList = new ArrayAdapter<Dictionary>();
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview_main_list);
-        mLinearLayoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(mLinearLayoutManager);
-
-        mAdapter = new CustomAdapter(mArrayList);
-
-        mReference = mDatabase.getReference().child("UserAccount").child(firebaseUser.getUid()); // 변경값을 확인할 child 이름
-        mReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                mArrayList.clear();
-                for (DataSnapshot messageData : dataSnapshot.getChildren()) {
-
-                    // child 내에 있는 데이터만큼 반복합니다.
-                    messageData.getValue()
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-
-
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview_main_list);
         mLinearLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
@@ -112,6 +86,54 @@ public class Fragment_1 extends Fragment {
                 mLinearLayoutManager.getOrientation());
         mRecyclerView.addItemDecoration(dividerItemDecoration);
 
+        mLinearLayoutManager = new LinearLayoutManager(getActivity());
+
+
+
+
+        mDatabase = FirebaseDatabase.getInstance();
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                mArrayList.clear();
+                for (DataSnapshot messageData : snapshot.getChildren()) {
+
+
+                    Post post = messageData.getValue(Post.class);
+                    if (post != null) {
+
+                        Title = post.getTitle_et();
+                        String content = post.getContent_et();
+
+                        Dictionary data = new Dictionary(count + "", firebaseUser.getEmail(), Title);
+                        mArrayList.add(0, data); //RecyclerView의 첫 줄에 i삽입
+//                mArrayList.add(data); // RecyclerView의 마지막 줄에 삽입
+
+
+
+//                    ((TextView) customView.findViewById(R.id.cmt_userid_tv)).setText(userid);
+//                    ((TextView) customView.findViewById(R.id.cmt_content_tv)).setText(content);
+//                    ((TextView) customView.findViewById(R.id.cmt_date_tv)).setText(crt_dt);
+
+
+                        // 댓글 레이아웃에 custom_comment 의 디자인에 데이터를 담아서 추가
+//                    comment_layout.addView(customView);
+                    }
+
+                }
+                mAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        mDatabase.getReference().child("UserAccount").child(firebaseUser.getUid()).addValueEventListener(postListener);
+
+
+
+
 
 
         Button buttonInsert = (Button) rootView.findViewById(R.id.button_main_insert);
@@ -120,13 +142,13 @@ public class Fragment_1 extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent( getActivity() , WritingActivity.class);
                 startActivity(intent);
-                mFirebaseAuth = FirebaseAuth.getInstance();
-                FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+
+
                 count++;
-                DatabaseReference mDatabaseRef= FirebaseDatabase.getInstance().getReference("GodGong");
+
                 String userId = "";
 
-                mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).child("emailId").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                         if (!task.isSuccessful()) {
@@ -139,7 +161,7 @@ public class Fragment_1 extends Fragment {
                         }
                     }
                 });
-                Dictionary data = new Dictionary(count+"",userId , "주제문" );
+                Dictionary data = new Dictionary(count+"",firebaseUser.getEmail() , Title );
 
                 mArrayList.add(0, data); //RecyclerView의 첫 줄에 i삽입
 //                mArrayList.add(data); // RecyclerView의 마지막 줄에 삽입
@@ -158,7 +180,7 @@ public class Fragment_1 extends Fragment {
 
         mDatabase = FirebaseDatabase.getInstance();
 
-        mReference = mDatabase.getReference("god");
+        mReference = mDatabase.getReference("log");
         mReference.child("log").setValue("check");
 
         mChild = new ChildEventListener() {
@@ -191,7 +213,7 @@ public class Fragment_1 extends Fragment {
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         mReference.removeEventListener(mChild);
     }
