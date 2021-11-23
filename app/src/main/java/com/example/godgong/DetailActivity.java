@@ -108,33 +108,43 @@ public class DetailActivity extends AppCompatActivity {
 
             }
         };
-        mDatabase.child("UserAccount").child(firebaseUser.getUid()).child("post").addValueEventListener(postListener);
+        mDatabase.child("UserAccount").child(firebaseUser.getUid()).child("post").addListenerForSingleValueEvent(postListener);
 
         // 댓글을 뿌릴 LinearLayout 자식뷰 모두 제거
-        comment_layout.removeAllViews();
+
 
         ValueEventListener commentListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                // custom_comment 를 불러오기 위한 객체
-                LayoutInflater layoutInflater = LayoutInflater.from(DetailActivity.this);
+                comment_layout.removeAllViews();
 
-                View customView = layoutInflater.inflate(R.layout.custom_comment, null);
-                com.example.godgong.Comment com = snapshot.getValue(com.example.godgong.Comment.class);
-                if(com!=null) {
+                for (DataSnapshot commentSnapshot : snapshot.getChildren()) {
 
-                    String userid = com.getId();
-                    String content = com.getComment();
-                    String crt_dt = com.getDate();
+                    // custom_comment 를 불러오기 위한 객체
+                    LayoutInflater layoutInflater = LayoutInflater.from(DetailActivity.this);
 
-                    ((TextView) customView.findViewById(R.id.cmt_userid_tv)).setText(userid);
-                    ((TextView) customView.findViewById(R.id.cmt_content_tv)).setText(content);
-                    ((TextView) customView.findViewById(R.id.cmt_date_tv)).setText(crt_dt);
+                    View customView = layoutInflater.inflate(R.layout.custom_comment, null);
+
+                    Comment com = commentSnapshot.getValue(Comment.class);
 
 
-                    // 댓글 레이아웃에 custom_comment 의 디자인에 데이터를 담아서 추가
-                    comment_layout.addView(customView);
+                    if (com != null) {
+
+                        String userid = com.getId();
+                        String content = com.getComment();
+                        String crt_dt = com.getDate();
+
+                        ((TextView) customView.findViewById(R.id.cmt_userid_tv)).setText(userid);
+                        ((TextView) customView.findViewById(R.id.cmt_content_tv)).setText(content);
+                        ((TextView) customView.findViewById(R.id.cmt_date_tv)).setText(crt_dt);
+
+//                    Toast.makeText(DetailActivity.this, com.getId(), Toast.LENGTH_SHORT).show();
+
+
+                        // 댓글 레이아웃에 custom_comment 의 디자인에 데이터를 담아서 추가
+                        comment_layout.addView(customView);
+                    }
                 }
 
             }
@@ -166,7 +176,7 @@ public class DetailActivity extends AppCompatActivity {
 
                     String getId = firebaseUser.getEmail();
 
-                    com.example.godgong.Comment comment = new com.example.godgong.Comment(getId, getTime, com);
+                    Comment comment = new Comment(getId, getTime, com);
 
                     FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
                     mDatabase.child("UserAccount").child(firebaseUser.getUid()).child("post").child("comment").push().setValue(comment);
@@ -194,10 +204,6 @@ public class DetailActivity extends AppCompatActivity {
 
 
     }
-
-
-
-
 
 
 

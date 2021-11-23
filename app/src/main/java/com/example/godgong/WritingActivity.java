@@ -1,5 +1,6 @@
 package com.example.godgong;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -84,7 +85,7 @@ public class WritingActivity extends AppCompatActivity {
 
                 Post post = new Post();
 
-
+//                post.setEmailId(firebaseUser.getEmail());
                 post.setTitle_et(strTitle);
                 post.setContent_et(strContent);
 
@@ -92,6 +93,8 @@ public class WritingActivity extends AppCompatActivity {
                 //setValue : database에 insert (삽입) 행위
                 mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).child("post").push().setValue(post);
                 Toast.makeText(WritingActivity.this, "글이 등록되었습니다.", Toast.LENGTH_SHORT).show();
+//                Intent intent = new Intent( WritingActivity.this , DetailActivity.class);
+//                startActivity(intent);
                 finish();
                 // Firebase Auth 진행
 

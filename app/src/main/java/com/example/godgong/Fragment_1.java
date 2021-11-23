@@ -33,14 +33,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Fragment_1 extends Fragment {
-    String Title;
+    String Title,emailId;
     private ArrayList<Dictionary> mArrayList;
     private CustomAdapter mAdapter;
     private int count = -1;
     LinearLayoutManager mLinearLayoutManager;
     private FirebaseAuth mFirebaseAuth;
     //-----
-    private FirebaseDatabase mDatabase;
+    private DatabaseReference mDatabase;
     private DatabaseReference mReference;
     private ChildEventListener mChild;
 
@@ -91,22 +91,28 @@ public class Fragment_1 extends Fragment {
 
 
 
-        mDatabase = FirebaseDatabase.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference("GodGong");
         ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 //                mArrayList.clear();
                 for (DataSnapshot messageData : snapshot.getChildren()) {
 
+                    EmailTitle emailTitle = messageData.getValue(EmailTitle.class);
+                    emailId = emailTitle.getEmailId();
+                    for (DataSnapshot messagePost  : snapshot.child("post").getChildren()) {
+                            Post post = messagePost.getValue(Post.class);
+                            if(post!=null) {
+                                String Title = post.getTitle_et();
+//                        String content = post.getContent_et();
 
-                    Post post = messageData.getValue(Post.class);
-                    if (post != null) {
+                                Dictionary data = new Dictionary(count + "", emailId, Title);
+                                mArrayList.add(0, data); //RecyclerView의 첫 줄에 i삽입
+                            }
+                        }
 
-                        Title = post.getTitle_et();
-                        String content = post.getContent_et();
 
-                        Dictionary data = new Dictionary(count + "", firebaseUser.getEmail(), Title);
-                        mArrayList.add(0, data); //RecyclerView의 첫 줄에 i삽입
+
 //                mArrayList.add(data); // RecyclerView의 마지막 줄에 삽입
 
 
@@ -118,7 +124,7 @@ public class Fragment_1 extends Fragment {
 
                         // 댓글 레이아웃에 custom_comment 의 디자인에 데이터를 담아서 추가
 //                    comment_layout.addView(customView);
-                    }
+
 
                 }
                 mAdapter.notifyDataSetChanged();
@@ -129,7 +135,7 @@ public class Fragment_1 extends Fragment {
 
             }
         };
-        mDatabase.getReference().child("UserAccount").child(firebaseUser.getUid()).addValueEventListener(postListener);
+        mDatabase.child("UserAccount").addValueEventListener(postListener);
 
 
 
@@ -148,27 +154,27 @@ public class Fragment_1 extends Fragment {
 
                 String userId = "";
 
-                mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-                        if (!task.isSuccessful()) {
-                            Log.e("firebase", "Error getting data", task.getException());
-                            Toast.makeText(getActivity(), "에러.", Toast.LENGTH_SHORT).show();
-                        }
-                        else {
-                            Log.d("firebase",String.valueOf(task.getResult().getValue()));
-                            Toast.makeText(getActivity(), "성공.", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-                Dictionary data = new Dictionary(count+"",firebaseUser.getEmail() , Title );
-
-                mArrayList.add(0, data); //RecyclerView의 첫 줄에 i삽입
-//                mArrayList.add(data); // RecyclerView의 마지막 줄에 삽입
-
-
-
-                mAdapter.notifyDataSetChanged();
+//                mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+//                        if (!task.isSuccessful()) {
+//                            Log.e("firebase", "Error getting data", task.getException());
+//                            Toast.makeText(getActivity(), "에러.", Toast.LENGTH_SHORT).show();
+//                        }
+//                        else {
+//                            Log.d("firebase",String.valueOf(task.getResult().getValue()));
+//                            Toast.makeText(getActivity(), "성공.", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
+//                Dictionary data = new Dictionary(count+"",firebaseUser.getEmail() , Title );
+//
+//                mArrayList.add(0, data); //RecyclerView의 첫 줄에 i삽입
+////                mArrayList.add(data); // RecyclerView의 마지막 줄에 삽입
+//
+//
+//
+//                mAdapter.notifyDataSetChanged();
 
 
             }
@@ -178,9 +184,9 @@ public class Fragment_1 extends Fragment {
     }
     private void initDatabase() {
 
-        mDatabase = FirebaseDatabase.getInstance();
 
-        mReference = mDatabase.getReference("log");
+
+        mReference = FirebaseDatabase.getInstance().getReference("log");
         mReference.child("log").setValue("check");
 
         mChild = new ChildEventListener() {
