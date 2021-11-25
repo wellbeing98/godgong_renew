@@ -85,13 +85,25 @@ public class WritingActivity extends AppCompatActivity {
 
                 Post post = new Post();
 
-//                post.setEmailId(firebaseUser.getEmail());
+                post.setEmailId(firebaseUser.getEmail());
                 post.setTitle_et(strTitle);
                 post.setContent_et(strContent);
 
+                String key = mDatabaseRef.child("posts").push().getKey();
+
+                Comment comment = new Comment();
+                mDatabaseRef.child("posts").child(key).setValue(post);
+                mDatabaseRef.child("comments").child(key).push().setValue(comment);
+//                mDatabaseRef.child("user-p").child(firebaseUser.getUid()).child(key).setValue(post);
+
+
+
+
+
+
 
                 //setValue : database에 insert (삽입) 행위
-                mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).child("post").push().setValue(post);
+                mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).child("post").push().setValue(key);
                 Toast.makeText(WritingActivity.this, "글이 등록되었습니다.", Toast.LENGTH_SHORT).show();
 //                Intent intent = new Intent( WritingActivity.this , DetailActivity.class);
 //                startActivity(intent);
