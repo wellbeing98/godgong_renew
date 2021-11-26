@@ -7,7 +7,13 @@ public class Dictionary {
     private String num;
     private String userId;
     private String Korean;
-
+    private String token;
+    public String getToken(){
+        return token;
+    }
+    public void setToken(String token){
+        this.token = token;
+    }
     public String getNum() {
         return num;
     }
