@@ -14,7 +14,9 @@ public class Comment {
     public Map<String, Boolean> stars = new HashMap<>();
 
     public Comment(){
-
+        id = "";
+        date = "";
+        comment="";
     }
 
     public String getId(){

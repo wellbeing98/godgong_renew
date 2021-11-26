@@ -1,6 +1,7 @@
 package com.example.godgong;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
@@ -80,7 +81,9 @@ public class DetailActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference("GodGong");
 //
 //        // 해당 게시물의 데이터 불러오기
+        SharedPreferences test = getSharedPreferences("test", MODE_PRIVATE);
 
+        String key = test.getString("key","DEFAULT");
 
         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
@@ -108,7 +111,7 @@ public class DetailActivity extends AppCompatActivity {
 
             }
         };
-        mDatabase.child("UserAccount").child(firebaseUser.getUid()).child("post").addListenerForSingleValueEvent(postListener);
+        mDatabase.child("posts").child(key).addListenerForSingleValueEvent(postListener);
 
         // 댓글을 뿌릴 LinearLayout 자식뷰 모두 제거
 
@@ -154,8 +157,9 @@ public class DetailActivity extends AppCompatActivity {
 
             }
         };
-        mDatabase.child("UserAccount").child(firebaseUser.getUid()).child("post").child("comment").addValueEventListener(commentListener);
+        mDatabase.child("comments").child(key).addValueEventListener(commentListener);
 
+//        mDatabase.child("posts").child("key").push().setValue(comment);
 
 
 
@@ -179,7 +183,9 @@ public class DetailActivity extends AppCompatActivity {
                     Comment comment = new Comment(getId, getTime, com);
 
                     FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
-                    mDatabase.child("UserAccount").child(firebaseUser.getUid()).child("post").child("comment").push().setValue(comment);
+
+
+                    mDatabase.child("comments").child(key).push().setValue(comment);
 
 
                     //댓글 입력창의 글자는 공백으로 만듦
