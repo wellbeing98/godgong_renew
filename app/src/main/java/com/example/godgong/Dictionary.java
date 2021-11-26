@@ -37,9 +37,10 @@ public class Dictionary {
     public void setKorean(String korean) {
         Korean = korean;
     }
-    public Dictionary(String num, String userId, String korean) {
+    public Dictionary(String num, String userId, String korean,String token) {
         this.num = num;
         this.userId = userId;
-        Korean = korean;
+        this.Korean = korean;
+        this.token = token;
     }
 }

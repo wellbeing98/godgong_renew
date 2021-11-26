@@ -1,6 +1,12 @@
 package com.example.godgong;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,8 +34,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.installations.FirebaseInstallations;
 
+import java.security.KeyStore;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class Fragment_1 extends Fragment {
@@ -73,6 +82,20 @@ public class Fragment_1 extends Fragment {
                 new CustomAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(View v, int pos) {
+                        Dictionary temp =mArrayList.get(pos);
+                        String key = temp.getToken();
+                        SharedPreferences test = getActivity().getSharedPreferences("test", MODE_PRIVATE);
+
+                        SharedPreferences.Editor editor = test.edit();
+
+                        editor.putString("key", key); //First라는 key값으로 infoFirst 데이터를 저장한다.
+
+
+
+                        editor.commit();
+
+
+
 
                         Intent intent = new Intent( getActivity() , DetailActivity.class);
                         startActivity(intent);
@@ -97,19 +120,21 @@ public class Fragment_1 extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 //                mArrayList.clear();
                 for (DataSnapshot messageData : snapshot.getChildren()) {
+                    KeyStore firebaseInstanceId;
 
-                    EmailTitle emailTitle = messageData.getValue(EmailTitle.class);
-                    emailId = emailTitle.getEmailId();
-                    for (DataSnapshot messagePost  : snapshot.child("post").getChildren()) {
-                            Post post = messagePost.getValue(Post.class);
+
+                    Post post = messageData.getValue(Post.class);
+                    emailId = post.getEmailId();
+                    String Token = post.getToken();
+
                             if(post!=null) {
                                 String Title = post.getTitle_et();
 //                        String content = post.getContent_et();
 
-                                Dictionary data = new Dictionary(count + "", emailId, Title);
+                                Dictionary data = new Dictionary(count + "", emailId, Title, Token);
                                 mArrayList.add(0, data); //RecyclerView의 첫 줄에 i삽입
                             }
-                        }
+
 
 
 
@@ -135,7 +160,7 @@ public class Fragment_1 extends Fragment {
 
             }
         };
-        mDatabase.child("UserAccount").addValueEventListener(postListener);
+        mDatabase.child("posts").addValueEventListener(postListener);
 
 
 
@@ -146,6 +171,10 @@ public class Fragment_1 extends Fragment {
         buttonInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+
+
                 Intent intent = new Intent( getActivity() , WritingActivity.class);
                 startActivity(intent);
 

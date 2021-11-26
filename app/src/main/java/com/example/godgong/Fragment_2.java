@@ -59,7 +59,7 @@ public class Fragment_2 extends Fragment {
 
                 count2++;
 
-                Dictionary data = new Dictionary(count2+"","UserId" , "주제문" );
+                Dictionary data = new Dictionary(count2+"","UserId" , "주제문","1");
 
                 mArrayList2.add(0, data); //RecyclerView의 첫 줄에 i삽입
 //                mArrayList.add(data); // RecyclerView의 마지막 줄에 삽입

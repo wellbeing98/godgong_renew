@@ -10,7 +10,15 @@ class Post {
     public String content_et;
     public int starCount = 0;
     public ImageView image;
-//    private String emailId;   //이메일 아이디
+    private String emailId;   //이메일 아이디
+    private String token;
+    public String getToken(){
+        return token;
+    }
+
+    public void setToken(String token){
+       this.token = token;
+    }
     public Post() {
 
     }
@@ -35,8 +43,8 @@ class Post {
     public String getContent_et() {
         return content_et;
     }
-//    public String getEmailId(){return emailId;}
-//    public void setEmailId(){this.emailId = emailId;}
+    public String getEmailId(){return emailId;}
+    public void setEmailId(String emailId){this.emailId = emailId;}
     private String idToken;   //파이어베이스 Uid (고유 토큰정보)
 
     private String password;  //비밀번호

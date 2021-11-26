@@ -90,7 +90,7 @@ public class WritingActivity extends AppCompatActivity {
                 post.setContent_et(strContent);
 
                 String key = mDatabaseRef.child("posts").push().getKey();
-
+                post.setToken(key);
                 Comment comment = new Comment();
                 mDatabaseRef.child("posts").child(key).setValue(post);
                 mDatabaseRef.child("comments").child(key).push().setValue(comment);
