@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.godgong">
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+
+
 
     <application
         android:allowBackup="true"
@@ -18,7 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name= ".WritingActivity">
+        <activity android:name= ".WritingChatActivity">
 
         </activity>
         <activity android:name=".DetailActivity"/>
@@ -27,7 +32,8 @@
         <activity android:name=".ChooseRoom"/>
         <activity android:name=".ChatActivity"/>
         <activity android:name=".RegisterActivity"/>
-
+        <activity android:name=".WritingProjectActivity"/>
+        <activity android:name=".ProjectActivity"/>
     </application>
 
 </manifest>

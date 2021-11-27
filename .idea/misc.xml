@@ -5,18 +5,27 @@
       <map>
         <entry key="..\:/Users/98tom/AndroidStudioProjects/godgong_renew/app/src/main/res/layout/activity_chat.xml" value="0.271875" />
         <entry key="..\:/Users/98tom/AndroidStudioProjects/godgong_renew/app/src/main/res/layout/activity_detail.xml" value="0.2755208333333333" />
-        <entry key="..\:/Users/98tom/AndroidStudioProjects/godgong_renew/app/src/main/res/layout/activity_notice.xml" value="0.25" />
         <entry key="..\:/Users/98tom/AndroidStudioProjects/godgong_renew/app/src/main/res/layout/activity_writing.xml" value="0.2755208333333333" />
         <entry key="..\:/Users/98tom/AndroidStudioProjects/godgong_renew/app/src/main/res/layout/activity_writing_post.xml" value="0.2755208333333333" />
+        <entry key="..\:/Users/ChungTaeWon/AndroidStudioProjects/godgong/app/src/main/res/layout/activity_chat.xml" value="0.33125" />
         <entry key="..\:/Users/ChungTaeWon/AndroidStudioProjects/godgong/app/src/main/res/layout/activity_detail.xml" value="0.33125" />
+        <entry key="..\:/Users/ChungTaeWon/AndroidStudioProjects/godgong/app/src/main/res/layout/activity_login.xml" value="0.33125" />
+        <entry key="..\:/Users/ChungTaeWon/AndroidStudioProjects/godgong/app/src/main/res/layout/activity_main.xml" value="0.33125" />
+        <entry key="..\:/Users/ChungTaeWon/AndroidStudioProjects/godgong/app/src/main/res/layout/activity_notice.xml" value="0.43148148148148147" />
+        <entry key="..\:/Users/ChungTaeWon/AndroidStudioProjects/godgong/app/src/main/res/layout/activity_project.xml" value="0.3375" />
+        <entry key="..\:/Users/ChungTaeWon/AndroidStudioProjects/godgong/app/src/main/res/layout/activity_register.xml" value="0.4638888888888889" />
+        <entry key="..\:/Users/ChungTaeWon/AndroidStudioProjects/godgong/app/src/main/res/layout/activity_start.xml" value="0.43148148148148147" />
         <entry key="..\:/Users/ChungTaeWon/AndroidStudioProjects/godgong/app/src/main/res/layout/activity_writing.xml" value="0.19895833333333332" />
+        <entry key="..\:/Users/ChungTaeWon/AndroidStudioProjects/godgong/app/src/main/res/layout/activity_writing_post.xml" value="0.3490740740740741" />
         <entry key="..\:/Users/ChungTaeWon/AndroidStudioProjects/godgong/app/src/main/res/layout/chooseroom.xml" value="0.19895833333333332" />
-        <entry key="..\:/Users/ChungTaeWon/AndroidStudioProjects/godgong/app/src/main/res/layout/custom_comment.xml" value="0.19895833333333332" />
+        <entry key="..\:/Users/ChungTaeWon/AndroidStudioProjects/godgong/app/src/main/res/layout/custom_comment.xml" value="0.33" />
+        <entry key="..\:/Users/ChungTaeWon/AndroidStudioProjects/godgong/app/src/main/res/layout/custom_register.xml" value="0.3375" />
         <entry key="..\:/Users/ChungTaeWon/AndroidStudioProjects/godgong/app/src/main/res/layout/fourth_layout.xml" value="0.19895833333333332" />
         <entry key="..\:/Users/ChungTaeWon/AndroidStudioProjects/godgong/app/src/main/res/layout/frame_1p.xml" value="0.19895833333333332" />
         <entry key="..\:/Users/ChungTaeWon/AndroidStudioProjects/godgong/app/src/main/res/layout/frame_2p.xml" value="0.19895833333333332" />
         <entry key="..\:/Users/ChungTaeWon/AndroidStudioProjects/godgong/app/src/main/res/layout/frame_3p.xml" value="0.19895833333333332" />
         <entry key="..\:/Users/ChungTaeWon/AndroidStudioProjects/godgong/app/src/main/res/layout/item_list.xml" value="0.33125" />
+        <entry key="..\:/Users/ChungTaeWon/AndroidStudioProjects/godgong/app/src/main/res/layout/layout.xml" value="0.33" />
         <entry key="..\:/Users/ChungTaeWon/AndroidStudioProjects/godgong/app/src/main/res/layout/mypage.xml" value="0.33125" />
         <entry key="..\:/Users/JH/AndroidStudioProjects/godgong/app/src/main/res/layout/activity_detail.xml" value="0.1296875" />
         <entry key="..\:/Users/JH/AndroidStudioProjects/godgong/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />

@@ -12,6 +12,23 @@ class Post {
     public ImageView image;
     private String emailId;   //이메일 아이디
     private String token;
+    private String Date;
+    private String writerId;
+
+    public java.lang.String getWriterId() {
+        return writerId;
+    }
+    public void setWriterId(String writerId){
+        this.writerId = writerId;
+    }
+
+    public String getDate(){
+        return Date;
+    }
+    public void setDate(String Date){
+        this.Date = Date;
+    }
+
     public String getToken(){
         return token;
     }

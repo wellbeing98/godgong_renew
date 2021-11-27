@@ -59,7 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
                     //uri.getLastPathSegment()
                     FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
-                    StorageReference riversRef = storageRef.child("images/"+firebaseUser.getUid());
+                    StorageReference riversRef = storageRef.child("images/"+firebaseUser.getEmail());
 //                    String filename =sdf.format(new Date())+ ".png";
                     UploadTask uploadTask = riversRef.putFile(uri);
                     uploadTask.addOnFailureListener(new OnFailureListener() {
