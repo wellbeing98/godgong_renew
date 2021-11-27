@@ -22,8 +22,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.Date;
 
-public class WritingChatActivity extends AppCompatActivity {
-
+public class WritingStudyActivity  extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth;       //파이어베이스 인증
     private DatabaseReference mDatabaseRef;
     private DatabaseReference mDatabase;
@@ -59,9 +58,9 @@ public class WritingChatActivity extends AppCompatActivity {
         StorageReference storageReference = storage.getReference();
         StorageReference pathReference = storageReference.child("images");
         if(pathReference == null){
-            Toast.makeText(WritingChatActivity.this, "저장소에 사진이 없습니다.", Toast.LENGTH_SHORT).show();}
+            Toast.makeText(WritingStudyActivity.this, "저장소에 사진이 없습니다.", Toast.LENGTH_SHORT).show();}
         else{
-            Toast.makeText(WritingChatActivity.this, "저장소에 사진이 있습니다.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(WritingStudyActivity.this, "저장소에 사진이 있습니다.", Toast.LENGTH_SHORT).show();
             FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
             StorageReference submitProfile = storageReference.child("images/"+firebaseUser.getEmail());
@@ -93,11 +92,11 @@ public class WritingChatActivity extends AppCompatActivity {
                 post.setContent_et(strContent);
                 post.setDate(getTime);
                 post.setWriterId(firebaseUser.getUid());
-                String key = mDatabaseRef.child("questionposts").push().getKey();
+                String key = mDatabaseRef.child("studyposts").push().getKey();
                 post.setToken(key);
-                Comment comment = new Comment();
-                mDatabaseRef.child("questionposts").child(key).setValue(post);
-                mDatabaseRef.child("comments").child(key).push().setValue(comment);
+                Register regi = new Register();
+                mDatabaseRef.child("studyposts").child(key).setValue(post);
+                mDatabaseRef.child("register").child(key).push().setValue(regi);
 //                mDatabaseRef.child("user-p").child(firebaseUser.getUid()).child(key).setValue(post);
 
 
@@ -108,7 +107,7 @@ public class WritingChatActivity extends AppCompatActivity {
 
                 //setValue : database에 insert (삽입) 행위
                 mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).child("post").push().setValue(key);
-                Toast.makeText(WritingChatActivity.this, "글이 등록되었습니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(WritingStudyActivity.this, "글이 등록되었습니다.", Toast.LENGTH_SHORT).show();
 //                Intent intent = new Intent( WritingActivity.this , DetailActivity.class);
 //                startActivity(intent);
                 finish();
@@ -126,6 +125,4 @@ public class WritingChatActivity extends AppCompatActivity {
 
 
     }
-
-
 }

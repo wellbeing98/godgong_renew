@@ -149,7 +149,7 @@ public class Fragment_1 extends Fragment {
 
             }
         };
-        mDatabase.child("chatposts").addValueEventListener(postListener);
+        mDatabase.child("questionposts").addValueEventListener(postListener);
 
 
 

@@ -47,13 +47,13 @@ public class Fragment_2 extends Fragment {
                 R.layout.frame_2p, container, false);
 
         RecyclerView mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview_main_list2);
-        mLinearLayoutManager2 = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(mLinearLayoutManager2);
+
         initDatabase();
         DatabaseReference mDatabaseRef;
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("GodGong");
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview_main_list);
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview_main_list2);
         mLinearLayoutManager2 = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mLinearLayoutManager2);
 
         mArrayList2 = new ArrayList<>();
 
@@ -92,6 +92,60 @@ public class Fragment_2 extends Fragment {
                 mLinearLayoutManager2.getOrientation());
         mRecyclerView.addItemDecoration(dividerItemDecoration);
 
+        mLinearLayoutManager2 = new LinearLayoutManager(getActivity());
+        mDatabase = FirebaseDatabase.getInstance().getReference("GodGong");
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                mArrayList2.clear();
+                for (DataSnapshot messageData : snapshot.getChildren()) {
+                    KeyStore firebaseInstanceId;
+
+
+                    Post post = messageData.getValue(Post.class);
+                    emailId = post.getEmailId();
+                    String Token = post.getToken();
+
+                    if(post!=null) {
+                        String Title = post.getTitle_et();
+//                        String content = post.getContent_et();
+
+                        Dictionary data = new Dictionary(post.getDate().substring(5,10), emailId, Title, Token);
+//                        count++;
+                        mArrayList2.add(0, data); //RecyclerView의 첫 줄에 i삽입
+                    }
+
+
+
+
+//                mArrayList.add(data); // RecyclerView의 마지막 줄에 삽입
+
+
+
+//                    ((TextView) customView.findViewById(R.id.cmt_userid_tv)).setText(userid);
+//                    ((TextView) customView.findViewById(R.id.cmt_content_tv)).setText(content);
+//                    ((TextView) customView.findViewById(R.id.cmt_date_tv)).setText(crt_dt);
+
+
+                    // 댓글 레이아웃에 custom_comment 의 디자인에 데이터를 담아서 추가
+//                    comment_layout.addView(customView);
+
+
+                }
+                mAdapter2.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        mDatabase.child("studypost").addValueEventListener(postListener);
+
+
+
+
+
 
 
         Button buttonInsert = (Button) rootView.findViewById(R.id.button_main_insert2);
@@ -99,7 +153,8 @@ public class Fragment_2 extends Fragment {
             @Override
             public void onClick(View v) {
 
-
+                Intent intent = new Intent( getActivity() , WritingChatActivity.class);
+                startActivity(intent);
 
 //                Dictionary data = new Dictionary(count2+"","UserId" , "주제문","1");
 //

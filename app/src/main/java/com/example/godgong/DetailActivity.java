@@ -130,7 +130,7 @@ public class DetailActivity extends AppCompatActivity {
 
             }
         };
-        mDatabase.child("chatposts").child(key).addListenerForSingleValueEvent(postListener);
+        mDatabase.child("questionposts").child(key).addListenerForSingleValueEvent(postListener);
 
         // 댓글을 뿌릴 LinearLayout 자식뷰 모두 제거
 

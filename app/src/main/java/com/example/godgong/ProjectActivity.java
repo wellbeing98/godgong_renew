@@ -1,6 +1,7 @@
 package com.example.godgong;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
@@ -49,6 +50,7 @@ public class ProjectActivity extends AppCompatActivity{
 //    EditText comment_et;
     Button reg_button;
     Button cancel_button;
+    Button chat_room;
     ImageView im_project;
 
     // 선택한 게시물의 번호
@@ -74,7 +76,7 @@ public class ProjectActivity extends AppCompatActivity{
         date_tv = findViewById(R.id.date_tv);
         id_tv = findViewById(R.id.id_tv);
         im_project = findViewById(R.id.im_project);
-
+        chat_room = findViewById(R.id.chatroom);
         register_layout = findViewById(R.id.register_layout);
 //        comment_et = findViewById(R.id.comment_et);
         reg_button = findViewById(R.id.reg_button);
@@ -265,6 +267,19 @@ public class ProjectActivity extends AppCompatActivity{
                 dataref.removeValue();
 
                 Toast.makeText(ProjectActivity.this, "프로젝트에 참여를 취소하였습니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        chat_room.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (id_tv.getText().toString().equals("") || title_tv.getText().toString().equals(""))
+                    return;
+
+                Intent intent = new Intent(ProjectActivity.this, ChatActivity.class);
+                intent.putExtra("chatName", title_tv.getText().toString());
+                intent.putExtra("userName", id_tv.getText().toString());
+                startActivity(intent);
             }
         });
 
