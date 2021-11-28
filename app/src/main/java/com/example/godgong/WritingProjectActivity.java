@@ -30,7 +30,7 @@ public class WritingProjectActivity extends AppCompatActivity {
 
 
     // 사용할 컴포넌트 선언
-    EditText title_et, content_et, zoomid_et, zoompwd_et;
+    EditText title_et, content_et;
     Button reg_button;
     ImageView mimage;
     // 유저아이디 변수
@@ -39,7 +39,7 @@ public class WritingProjectActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_team_post);
+        setContentView(R.layout.activity_writing_post);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("GodGong");
@@ -51,8 +51,6 @@ public class WritingProjectActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
 // 컴포넌트 초기화
-        zoomid_et = findViewById(R.id.zoomid_et);
-        zoompwd_et = findViewById(R.id.zoompwd_et);
         mimage = findViewById(R.id.imageView2);
         title_et = findViewById(R.id.title_et);
         content_et = findViewById(R.id.content_et);
@@ -85,8 +83,7 @@ public class WritingProjectActivity extends AppCompatActivity {
                 String getTime = sdf.format(date);
                 String strTitle = title_et.getText().toString();
                 String strContent = content_et.getText().toString();
-                String strZoomId = zoomid_et.getText().toString();
-                String strZoomPwd = zoompwd_et.getText().toString();
+
                 FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 //               ImageView image = mimage.getDrawable(R.drawable.ic_launcher_background);
 
@@ -95,7 +92,6 @@ public class WritingProjectActivity extends AppCompatActivity {
                 post.setEmailId(firebaseUser.getEmail());
                 post.setTitle_et(strTitle);
                 post.setContent_et(strContent);
-                post.set
                 post.setDate(getTime);
                 post.setWriterId(firebaseUser.getUid());
                 String key = mDatabaseRef.child("projectposts").push().getKey();
