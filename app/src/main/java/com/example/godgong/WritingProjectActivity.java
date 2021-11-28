@@ -30,7 +30,7 @@ public class WritingProjectActivity extends AppCompatActivity {
 
 
     // 사용할 컴포넌트 선언
-    EditText title_et, content_et;
+    EditText title_et, content_et, zoomid_et, zoompwd_Et;
     Button reg_button;
     ImageView mimage;
     // 유저아이디 변수

@@ -29,7 +29,7 @@ public class WritingStudyActivity  extends AppCompatActivity {
 
 
     // 사용할 컴포넌트 선언
-    EditText title_et, content_et;
+    EditText title_et, content_et, zoomid_et,zoompwd_et;
     Button reg_button;
     ImageView mimage;
     // 유저아이디 변수
@@ -38,7 +38,7 @@ public class WritingStudyActivity  extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_writing_post);
+        setContentView(R.layout.activity_study_post);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("GodGong");
@@ -53,6 +53,8 @@ public class WritingStudyActivity  extends AppCompatActivity {
         mimage = findViewById(R.id.imageView2);
         title_et = findViewById(R.id.title_et);
         content_et = findViewById(R.id.content_et);
+        zoomid_et = findViewById(R.id.zoomid_et);
+        zoompwd_et = findViewById(R.id.zoompwd_et);
         reg_button = findViewById(R.id.reg_button);
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageReference = storage.getReference();
@@ -81,6 +83,10 @@ public class WritingStudyActivity  extends AppCompatActivity {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 String getTime = sdf.format(date);
                 String strTitle = title_et.getText().toString();
+                String strZoomId = zoomid_et.getText().toString();
+                String strZoomPwd = zoompwd_et.getText().toString();
+
+
                 String strContent = content_et.getText().toString();
                 FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 //               ImageView image = mimage.getDrawable(R.drawable.ic_launcher_background);
@@ -90,6 +96,8 @@ public class WritingStudyActivity  extends AppCompatActivity {
                 post.setEmailId(firebaseUser.getEmail());
                 post.setTitle_et(strTitle);
                 post.setContent_et(strContent);
+                post.setZoomId_et(strZoomId);
+                post.setZoomPwd_et(strZoomPwd);
                 post.setDate(getTime);
                 post.setWriterId(firebaseUser.getUid());
                 String key = mDatabaseRef.child("studyposts").push().getKey();
@@ -108,7 +116,7 @@ public class WritingStudyActivity  extends AppCompatActivity {
                 //setValue : database에 insert (삽입) 행위
                 mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).child("post").push().setValue(key);
                 Toast.makeText(WritingStudyActivity.this, "글이 등록되었습니다.", Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent( WritingActivity.this , DetailActivity.class);
+//                Intent intent = new Intent( WritingStudyActivity.this , DetailActivity.class);
 //                startActivity(intent);
                 finish();
                 // Firebase Auth 진행

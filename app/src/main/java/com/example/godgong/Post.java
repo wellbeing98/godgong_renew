@@ -52,8 +52,8 @@ class Post {
     }
 
     public void setContent_et(String content_et) { this.content_et = content_et;}
-    public void setZoomid_et(String zoomid_et) {this.zoomid_et = zoomid_et;}
-    public void setZoompwd_et(String zoompwd_et) {this.zoompwd_et = zoompwd_et;}
+    public void setZoomId_et(String zoomid_et) {this.zoomid_et = zoomid_et;}
+    public void setZoomPwd_et(String zoompwd_et) {this.zoompwd_et = zoompwd_et;}
 
     public String getTitle_et() {
         return title_et;

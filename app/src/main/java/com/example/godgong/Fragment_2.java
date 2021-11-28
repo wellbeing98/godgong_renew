@@ -153,7 +153,7 @@ public class Fragment_2 extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent( getActivity() , WritingChatActivity.class);
+                Intent intent = new Intent( getActivity() , WritingStudyActivity.class);
                 startActivity(intent);
 
 //                Dictionary data = new Dictionary(count2+"","UserId" , "주제문","1");

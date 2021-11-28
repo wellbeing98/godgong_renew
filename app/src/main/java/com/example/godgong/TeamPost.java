@@ -1,36 +1,22 @@
 package com.example.godgong;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.Registry;
-import com.bumptech.glide.annotation.GlideModule;
-import com.bumptech.glide.module.AppGlideModule;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 
 public class TeamPost extends AppCompatActivity {
 
@@ -49,7 +35,7 @@ public class TeamPost extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_team_post);
+        setContentView(R.layout.activity_study_post);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("GodGong");
