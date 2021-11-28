@@ -8,6 +8,8 @@ class Post {
 
     public String title_et;
     public String content_et;
+    public String zoomid_et;
+    public String zoompwd_et;
     public int starCount = 0;
     public ImageView image;
     private String emailId;   //이메일 아이디
@@ -49,9 +51,9 @@ class Post {
         this.title_et = title_et;
     }
 
-    public void setContent_et(String content_et) {
-        this.content_et = content_et;
-    }
+    public void setContent_et(String content_et) { this.content_et = content_et;}
+    public void setZoomid_et(String zoomid_et) {this.zoomid_et = zoomid_et;}
+    public void setZoompwd_et(String zoompwd_et) {this.zoompwd_et = zoompwd_et;}
 
     public String getTitle_et() {
         return title_et;
@@ -59,6 +61,14 @@ class Post {
 
     public String getContent_et() {
         return content_et;
+    }
+
+    public String getZoomid_et() {
+        return zoomid_et;
+    }
+
+    public String getZoompwd_et() {
+        return zoompwd_et;
     }
     public String getEmailId(){return emailId;}
     public void setEmailId(String emailId){this.emailId = emailId;}
@@ -74,6 +84,8 @@ class Post {
 
         this.title_et = title_et;
         this.content_et = content_et;
+        this.zoomid_et = zoomid_et;
+        this.zoompwd_et =zoompwd_et;
     }
 
 //    public void setEmailId(String emailId) {
