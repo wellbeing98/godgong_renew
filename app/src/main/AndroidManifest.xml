@@ -26,6 +26,7 @@
         <activity android:name= ".WritingChatActivity">
 
         </activity>
+        <activity android:name=".WritingStudyActivity"/>
         <activity android:name=".DetailActivity"/>
         <activity android:name=".MainActivity" />
         <activity android:name=".StartActivity"/>

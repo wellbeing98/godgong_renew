@@ -50,7 +50,7 @@ public class WritingStudyActivity  extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
 // 컴포넌트 초기화
-        mimage = findViewById(R.id.imageView2);
+        mimage = findViewById(R.id.imageView);
         title_et = findViewById(R.id.title_et);
         content_et = findViewById(R.id.content_et);
         zoomid_et = findViewById(R.id.zoomid_et);
@@ -59,6 +59,7 @@ public class WritingStudyActivity  extends AppCompatActivity {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageReference = storage.getReference();
         StorageReference pathReference = storageReference.child("images");
+        mimage.setImageResource(R.drawable.write);
         if(pathReference == null){
             Toast.makeText(WritingStudyActivity.this, "저장소에 사진이 없습니다.", Toast.LENGTH_SHORT).show();}
         else{
@@ -72,7 +73,7 @@ public class WritingStudyActivity  extends AppCompatActivity {
                     .load(submitProfile)
                     .into(mimage);
         }
-        mimage.setImageResource(R.drawable.write);
+
 
         reg_button.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -91,7 +92,7 @@ public class WritingStudyActivity  extends AppCompatActivity {
                 FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 //               ImageView image = mimage.getDrawable(R.drawable.ic_launcher_background);
 
-                Post post = new Post();
+                PostZoom post = new PostZoom();
 
                 post.setEmailId(firebaseUser.getEmail());
                 post.setTitle_et(strTitle);
@@ -104,7 +105,7 @@ public class WritingStudyActivity  extends AppCompatActivity {
                 post.setToken(key);
                 Register regi = new Register();
                 mDatabaseRef.child("studyposts").child(key).setValue(post);
-                mDatabaseRef.child("register").child(key).push().setValue(regi);
+                mDatabaseRef.child("registerzoom").child(key).push().setValue(regi);
 //                mDatabaseRef.child("user-p").child(firebaseUser.getUid()).child(key).setValue(post);
 
 
@@ -114,10 +115,11 @@ public class WritingStudyActivity  extends AppCompatActivity {
 
 
                 //setValue : database에 insert (삽입) 행위
-                mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).child("post").push().setValue(key);
+                mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).child("postzoom").push().setValue(key);
                 Toast.makeText(WritingStudyActivity.this, "글이 등록되었습니다.", Toast.LENGTH_SHORT).show();
 //                Intent intent = new Intent( WritingStudyActivity.this , DetailActivity.class);
 //                startActivity(intent);
+
                 finish();
                 // Firebase Auth 진행
 

@@ -15,6 +15,8 @@
         <entry key="..\:/Users/ChungTaeWon/AndroidStudioProjects/godgong/app/src/main/res/layout/activity_project.xml" value="0.3375" />
         <entry key="..\:/Users/ChungTaeWon/AndroidStudioProjects/godgong/app/src/main/res/layout/activity_register.xml" value="0.4638888888888889" />
         <entry key="..\:/Users/ChungTaeWon/AndroidStudioProjects/godgong/app/src/main/res/layout/activity_start.xml" value="0.43148148148148147" />
+        <entry key="..\:/Users/ChungTaeWon/AndroidStudioProjects/godgong/app/src/main/res/layout/activity_study.xml" value="0.5536458333333333" />
+        <entry key="..\:/Users/ChungTaeWon/AndroidStudioProjects/godgong/app/src/main/res/layout/activity_study_post.xml" value="0.3401360544217687" />
         <entry key="..\:/Users/ChungTaeWon/AndroidStudioProjects/godgong/app/src/main/res/layout/activity_subject.xml" value="0.25" />
         <entry key="..\:/Users/ChungTaeWon/AndroidStudioProjects/godgong/app/src/main/res/layout/activity_writing.xml" value="0.19895833333333332" />
         <entry key="..\:/Users/ChungTaeWon/AndroidStudioProjects/godgong/app/src/main/res/layout/activity_writing_post.xml" value="0.3490740740740741" />
@@ -37,7 +39,6 @@
         <entry key="..\:/Users/JH/AndroidStudioProjects/godgong/app/src/main/res/layout/secondlayout.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/JH/AndroidStudioProjects/godgong/app/src/main/res/layout/thirdlayout.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/JH/AndroidStudioProjects/godgong/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.26979166666666665" />
-        <entry key="..\:/Users/dkstl/AndroidStudioProjects/godgong_renew/app/src/main/res/layout/activity_team_post.xml" value="0.17916666666666667" />
       </map>
     </option>
   </component>

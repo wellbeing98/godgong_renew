@@ -87,8 +87,8 @@ public class TeamPost extends AppCompatActivity {
 
                 post.setTitle_et(strTitle);
                 post.setContent_et(strContent);
-                post.setZoomid_et(strZoomId);
-                post.setZoompwd_et(strZoomPwd);
+//                post.setZoomid_et(strZoomId);
+//                post.setZoompwd_et(strZoomPwd);
 
 
                 //setValue : database에 insert (삽입) 행위
